@@ -59,3 +59,52 @@ func testFramework(t *testing.T, sortingFunction func([]int) []int) {
 func TestBubbleSort(t *testing.T) {
 	testFramework(t, sort.Bubble[int])
 }
+
+func TestCombSort(t *testing.T) {
+	testFramework(t, sort.Comb[int])
+}
+
+func benchmarkFramework(b *testing.B, f func(arr []int) []int) {
+	var sortTests = []struct {
+		input    []int
+		expected []int
+		name     string
+	}{
+		//Sorted slice
+		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+			[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, "Sorted Unsigned"},
+		//Reversed slice
+		{[]int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1},
+			[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, "Reversed Unsigned"},
+		//Sorted slice
+		{[]int{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+			[]int{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, "Sorted Signed"},
+		//Reversed slice
+		{[]int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10},
+			[]int{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, "Reversed Signed"},
+		//Reversed slice, even length
+		{[]int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10},
+			[]int{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, "Reversed Signed #2"},
+		//Random order with repetitions
+		{[]int{-5, 7, 4, -2, 6, 5, 8, 3, 2, -7, -1, 0, -3, 9, -6, -4, 10, 9, 1, -8, -9, -10},
+			[]int{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 10}, "Random order Signed"},
+		//Empty slice
+		{[]int{}, []int{}, "Empty"},
+		//Single-entry slice
+		{[]int{1}, []int{1}, "Singleton"},
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		for _, test := range sortTests {
+			f(test.input)
+		}
+	}
+}
+
+func BenchmarkBubble(b *testing.B) {
+	benchmarkFramework(b, sort.Bubble[int])
+}
+
+func BenchmarkComb(b *testing.B) {
+	benchmarkFramework(b, sort.Comb[int])
+}
