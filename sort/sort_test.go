@@ -68,6 +68,10 @@ func TestCount(t *testing.T) {
 	testFramework(t, sort.Count[int])
 }
 
+func TestExchange(t *testing.T) {
+	testFramework(t, sort.Exchange[int])
+}
+
 func benchmarkFramework(b *testing.B, f func(arr []int) []int) {
 	var sortTests = []struct {
 		input    []int
@@ -115,4 +119,8 @@ func BenchmarkComb(b *testing.B) {
 
 func BenchmarkCount(b *testing.B) {
 	benchmarkFramework(b, sort.Count[int])
+}
+
+func BenchmarkExchange(b *testing.B) {
+	benchmarkFramework(b, sort.Exchange[int])
 }
