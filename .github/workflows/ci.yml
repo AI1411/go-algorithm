@@ -1,9 +1,9 @@
 name: Continuous Integration
 on:
   push:
-    branches:
-      - master
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
 
 jobs:
   golang_lint_and_test:
