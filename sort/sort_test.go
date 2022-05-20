@@ -64,6 +64,10 @@ func TestCombSort(t *testing.T) {
 	testFramework(t, sort.Comb[int])
 }
 
+func TestCount(t *testing.T) {
+	testFramework(t, sort.Count[int])
+}
+
 func benchmarkFramework(b *testing.B, f func(arr []int) []int) {
 	var sortTests = []struct {
 		input    []int
@@ -107,4 +111,8 @@ func BenchmarkBubble(b *testing.B) {
 
 func BenchmarkComb(b *testing.B) {
 	benchmarkFramework(b, sort.Comb[int])
+}
+
+func BenchmarkCount(b *testing.B) {
+	benchmarkFramework(b, sort.Count[int])
 }
