@@ -28,6 +28,21 @@ func testFramework(t *testing.T, sortingFunction func([]int) []int) {
 			want:  []int{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
 			name:  "Sorted Signed Ints",
 		},
+		{
+			input: []int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10},
+			want:  []int{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+			name:  "Reverse Sorted Signed Ints",
+		},
+		{
+			input: []int{1},
+			want:  []int{1},
+			name:  "Single Element",
+		},
+		{
+			input: []int{},
+			want:  []int{},
+			name:  "Empty Slice",
+		},
 	}
 	for _, test := range sortTests {
 		t.Run(test.name, func(t *testing.T) {
