@@ -76,6 +76,10 @@ func TestHeap(t *testing.T) {
 	testFramework(t, sort.HeapSort)
 }
 
+func TestInsertionSort(t *testing.T) {
+	testFramework(t, sort.InsertionSort[int])
+}
+
 func benchmarkFramework(b *testing.B, f func(arr []int) []int) {
 	var sortTests = []struct {
 		input    []int
@@ -131,4 +135,8 @@ func BenchmarkExchange(b *testing.B) {
 
 func BenchmarkHeap(b *testing.B) {
 	benchmarkFramework(b, sort.HeapSort)
+}
+
+func BenchmarkInsertion(b *testing.B) {
+	benchmarkFramework(b, sort.InsertionSort[int])
 }
