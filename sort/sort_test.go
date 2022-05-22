@@ -84,6 +84,10 @@ func TestMerge(t *testing.T) {
 	testFramework(t, sort.Merge[int])
 }
 
+func TestPipeOnHole(t *testing.T) {
+	testFramework(t, sort.PipeOnHole)
+}
+
 func benchmarkFramework(b *testing.B, f func(arr []int) []int) {
 	var sortTests = []struct {
 		input    []int
@@ -147,4 +151,8 @@ func BenchmarkInsertion(b *testing.B) {
 
 func BenchmarkMerge(b *testing.B) {
 	benchmarkFramework(b, sort.Merge[int])
+}
+
+func BenchmarkPipeOnHole(b *testing.B) {
+	benchmarkFramework(b, sort.PipeOnHole)
 }
