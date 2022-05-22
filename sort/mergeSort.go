@@ -2,7 +2,7 @@ package sort
 
 import (
 	"github.com/AI1411/go-algorithm/constraints"
-	min "github.com/AI1411/go-algorithm/math"
+	"github.com/AI1411/go-algorithm/math/min"
 )
 
 func merge[T constraints.Ordered](a []T, b []T) []T {
