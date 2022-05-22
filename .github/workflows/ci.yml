@@ -27,4 +27,4 @@ jobs:
         run: go test ./... -v
 
       - name: Benchmark
-        run: go test -bench . ./sort/... -benchmem -v
+        run: go test -bench . ./sort/... ./search/... -benchmem -v
